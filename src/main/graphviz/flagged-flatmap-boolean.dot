@@ -1,0 +1,38 @@
+digraph {
+    Start[class="extremity"]
+    Goal[class="extremity"]
+
+    FA[label="Flagged[A]" group="upper" class="start,disabled"]
+    A[group="upper" class="disabled"]
+    FB[label="Flagged[B]" group="upper" class="disabled"]
+    B[group="upper" class="disabled"]
+    FB2[label="Flagged[B]" group="upper" class="goal,disabled"]
+    XX[label="Boolean×Boolean" group="lower"]
+    X[label="Boolean" group="lower"]
+
+
+    {
+        rank=same
+        A -> FA[dir="back" class="disabled"]
+    }
+
+
+    {
+        rank=same
+        FB -> XX[class="disabled"]
+    }
+
+    {
+        rank=same
+        FB2 -> X[dir="back" class="disabled"]
+    }
+
+    FA -> XX[class="disabled"]
+    A -> FB[label="f" class="disabled"]
+    XX -> X[label="||" class="disabled"]
+    FB -> B[class="disabled"]
+    B  -> FB2[class="disabled"]
+
+    Start -> FA[class="start,disabled"]
+    FB2 -> Goal[class="goal,disabled"]
+}

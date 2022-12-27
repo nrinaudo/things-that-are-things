@@ -1,0 +1,41 @@
+digraph {
+    Start[class="extremity"]
+    Goal[class="extremity"]
+
+    FAFB[label="F[A]×F[B]" class="start"]
+    FA[label="F[A]" style="invis"]
+    FB[label="F[B]" style="invis"]
+    XX[label="X×X" style="invis"]
+    AB[label="A×B"]
+    FC[label="F[C]" class="goal"]
+    X[style="invis"]
+
+    {
+        rank=same
+        FA -> FB[style="invis"]
+    }
+
+    {
+        rank=same
+        XX -> AB[style="invis"]
+    }
+
+        {
+        rank=same
+        X -> C[style="invis"]
+    }
+
+    FAFB -> FA[style="invis"]
+    FAFB -> FB[style="invis"]
+    FA -> XX[style="invis"]
+    FA -> AB[style="invis"]
+    FB -> XX[style="invis"]
+    FB -> AB[style="invis"]
+    XX -> X[label="combine" style="invis"]
+    AB -> C[label="f"]
+    X -> FC[style="invis"]
+    C -> FC[style="invis"]
+
+    Start -> FAFB[class="start"]
+    FC -> Goal[class="goal"]
+}
