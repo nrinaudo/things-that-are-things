@@ -42,11 +42,6 @@
 <text text-anchor="middle" x="67.6" y="-86.3" font-family="Inter,Arial" font-size="14.00" fill="#586e75">A</text>
 </g>
 <!-- A&#45;&gt;FA -->
-<g id="edge3" class="edge lift">
-<title>A&#45;&gt;FA</title>
-<path fill="none" stroke="#586e75" stroke-dasharray="5,2" d="M67.6,-71.95C67.6,-63.41 67.6,-54.86 67.6,-46.31"/>
-<polygon fill="#586e75" stroke="#586e75" points="71.1,-46.28 67.6,-36.28 64.1,-46.28 71.1,-46.28"/>
-</g>
 <!-- A&#45;&gt;FB -->
 <g id="edge1" class="edge">
 <title>A&#45;&gt;FB</title>

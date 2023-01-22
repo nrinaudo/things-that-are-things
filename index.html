@@ -48,6 +48,26 @@ class: center, middle
 
 ## Functor
 
+.center[![Functor](img/functor-fa.svg)]
+
+```scala
+def map[A, B](f: A => B)(`fa: F[A]`): F[B]
+```
+
+---
+
+## Functor
+
+.center[![Functor](img/functor-fb.svg)]
+
+```scala
+def map[A, B](f: A => B)(fa: F[A]): `F[B]`
+```
+
+---
+
+## Functor
+
 .center[![Functor](img/functor-f.svg)]
 
 ```scala
@@ -61,17 +81,7 @@ def map[A, B](`f: A => B`)(fa: F[A]): F[B]
 .center[![Functor](img/functor-map.svg)]
 
 ```scala
-def `map[A, B]`(f: A => B)(fa: F[A]): F[B]
-```
-
----
-
-## Functor
-
-.center[![Functor](img/functor-mapf.svg)]
-
-```scala
-def map[A, B](f: A => B)(`fa: F[A]`): `F[B]`
+def `map`[A, B](f: A => B)(fa: F[A]): F[B]
 ```
 
 ---
@@ -88,37 +98,12 @@ def map[A, B](f: A => B)(fa: F[A]): F[B]
 
 ## Function
 
-.center[![Overview](img/function-no-map.svg)]
+.center[![Overview](img/function-no-fb.svg)]
 
 ```scala
 type F[A] = `X => A`
-```
 
----
-
-## Function
-
-.center[![Overview](img/function-no-map.svg)]
-
-.diff-add[
-```scala
-type F[A] = X => A
-*
-*&#x200B;`def map[A, B](f: A => B)(fa: F[A]): F[B] =`
-* `???`
-```
-]
-
----
-
-## Function
-
-.center[![Overview](img/function-f.svg)]
-
-```scala
-type F[A] = X => A
-
-def map[A, B](`f: A => B`)(fa: F[A]): F[B] =
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
   ???
 ```
 
@@ -134,6 +119,20 @@ type F[A] = X => A
 def map[A, B](f: A => B)(`fa: F[A]`): F[B] =
   ???
 ```
+
+---
+
+## Function
+
+.center[![Overview](img/function-f.svg)]
+
+```scala
+type F[A] = X => A
+
+def map[A, B](`f: A => B`)(fa: F[A]): F[B] =
+  ???
+```
+
 
 ---
 
@@ -682,6 +681,27 @@ class: center, middle
 
 ## Apply
 
+.center[![Apply](img/apply-fa-fb.svg)]
+
+```scala
+def map2[A, B, C](f: (A, B) => C)(`fa: F[A], fb: F[B]`): F[C]
+```
+
+---
+
+## Apply
+
+.center[![Apply](img/apply-fc.svg)]
+
+```scala
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): `F[C]`
+```
+
+
+---
+
+## Apply
+
 .center[![Apply](img/apply-f.svg)]
 
 ```scala
@@ -692,24 +712,11 @@ def map2[A, B, C](`f: (A, B) => C`)(fa: F[A], fb: F[B]): F[C]
 
 ## Apply
 
-.center[![Apply](img/apply-map2.svg)]
+.center[![Apply](img/apply-map.svg)]
 
 ```scala
-def `map2[A, B, C]`(f: (A, B) => C)(fa: F[A], fb: F[B]): F[C]
+def `map2`[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C]
 ```
-
-
----
-
-## Apply
-
-.center[![Apply](img/apply-map2f.svg)]
-
-```scala
-def map2[A, B, C](f: (A, B) => C)(`fa: F[A], fb: F[B]`): `F[C]`
-```
-
-
 
 ---
 
@@ -1250,7 +1257,7 @@ type F[A] = A×String
 
 .diff-rm[
 ```scala
-*&#x200B;`type F[A] = A×String`
+*type `F[A]` = A×String
 ```
 ]
 
@@ -1262,7 +1269,7 @@ type F[A] = A×String
 
 .diff-add[
 ```scala
-*&#x200B;`case class Labelled[A](value: A, label: String)`
+*type `Labelled[A]` = A×String
 ```
 ]
 
@@ -1275,7 +1282,7 @@ type F[A] = A×String
 .center[![Overview](img/labelled.svg)]
 
 ```scala
-case class Labelled[A](value: A, label: String)
+type Labelled[A] = A×String
 
 ```
 
@@ -1632,7 +1639,7 @@ type F[A] = A×PosInt
 
 .diff-rm[
 ```scala
-*&#x200B;`type F[A] = A×PosInt`
+*type `F[A]` = A×PosInt
 ```
 ]
 
@@ -1644,7 +1651,7 @@ type F[A] = A×PosInt
 
 .diff-add[
 ```scala
-*&#x200B;`case class Weighted[A](value: A, weight: PosInt)`
+*type `Weighted[A]` = A×PosInt
 ```
 ]
 
@@ -1655,7 +1662,7 @@ type F[A] = A×PosInt
 .center[![Overview](img/weighted.svg)]
 
 ```scala
-case class Weighted[A](value: A, weight: PosInt)
+type Weighted[A] = A×PosInt
 
 ```
 
@@ -1706,7 +1713,27 @@ class: center, middle
 
 ## FlatMap
 
-.center[![Overview](img/flatmap-afb.svg)]
+.center[![Overview](img/flatmap-fa.svg)]
+
+```scala
+def flatMap[B](f: A => F[B])(`fa: F[A]`): F[B]
+```
+
+---
+
+## FlatMap
+
+.center[![Overview](img/flatmap-fb.svg)]
+
+```scala
+def flatMap[B](f: A => F[B])(fa: F[A]): `F[B]`
+```
+
+---
+
+## FlatMap
+
+.center[![Overview](img/flatmap-f.svg)]
 
 ```scala
 def flatMap[B](`f: A => F[B]`)(fa: F[A]): F[B]
@@ -1720,16 +1747,6 @@ def flatMap[B](`f: A => F[B]`)(fa: F[A]): F[B]
 
 ```scala
 def `flatMap`[B](f: A => F[B])(fa: F[A]): F[B]
-```
-
----
-
-## FlatMap
-
-.center[![Overview](img/flatmap-flatmapf.svg)]
-
-```scala
-def flatMap[B](f: A => F[B])(`fa: F[A]`): `F[B]`
 ```
 
 ---
@@ -2376,7 +2393,7 @@ def combine(lhs: PosInt, rhs: PosInt): PosInt =
 
 .diff-rm[
 ```scala
-*&#x200B;`type F[A] = PosInt`
+*type `F[A]` = PosInt
 
 def combine(lhs: PosInt, rhs: PosInt): PosInt =
   ???
@@ -2391,7 +2408,7 @@ def combine(lhs: PosInt, rhs: PosInt): PosInt =
 
 .diff-add[
 ```scala
-*&#x200B;`case class Weight[A](weight: PosInt)`
+*type `Weight[A]` = PosInt
 
 def combine(lhs: PosInt, rhs: PosInt): PosInt =
   ???
@@ -2405,7 +2422,7 @@ def combine(lhs: PosInt, rhs: PosInt): PosInt =
 .center[![Overview](img/weight.svg)]
 
 ```scala
-case class Weight[A](weight: PosInt)
+type Weight[A] = PosInt
 
 def combine(lhs: PosInt, rhs: PosInt): PosInt =
   ???
@@ -2472,7 +2489,7 @@ class: center, middle
 .center[![Overview](img/flagged-pure-flagged.svg)]
 
 ```scala
-case class `Flagged`[A](value: A, flag: Boolean)
+type `Flagged[A]` = A×Boolean
 ```
 
 ---
@@ -2482,7 +2499,7 @@ case class `Flagged`[A](value: A, flag: Boolean)
 .center[![Overview](img/flagged-pure-a.svg)]
 
 ```scala
-case class Flagged[A](`value: A`, flag: Boolean)
+type Flagged[A] = `A`×Boolean
 ```
 
 ---
@@ -2492,8 +2509,7 @@ case class Flagged[A](`value: A`, flag: Boolean)
 .center[![Overview](img/flagged-pure-boolean.svg)]
 
 ```scala
-case class Flagged[A](value: A, `flag: Boolean`)
-
+type Flagged[A] = A×`Boolean`
 ```
 
 
@@ -2505,10 +2521,10 @@ case class Flagged[A](value: A, `flag: Boolean`)
 
 .diff-add[
 ```scala
-case class Flagged[A](value: A, flag: Boolean)
+type Flagged[A] = A×Boolean
 
 *&#x200B;`def pure[A](a: A): Flagged[A] =`
-* `Flagged(a, false)`
+* `a×false`
 ```
 ]
 
@@ -2519,10 +2535,10 @@ case class Flagged[A](value: A, flag: Boolean)
 .center[![Overview](img/flagged-pure.svg)]
 
 ```scala
-case class Flagged[A](value: A, flag: Boolean)
+type Flagged[A] = A×Boolean
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(a, `false`)
+  a×`false`
 ```
 
 ---
@@ -2533,14 +2549,17 @@ def pure[A](a: A): Flagged[A] =
 
 .diff-add[
 ```scala
-case class Flagged[A](value: A, flag: Boolean)
+type Flagged[A] = A×Boolean
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(a, false)
+  a×false
 *
 *&#x200B;`def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =`
-* `val fb = f(fa.value)`
-* `Flagged(fb.value, fa.flag || fb.flag)`
+* `val (a×x1) = fa`
+* `val (b×x2) = f(a)`
+* `val x3     = x1 || x2`
+*
+* `b×x3`
 ```
 ]
 
@@ -2551,14 +2570,17 @@ def pure[A](a: A): Flagged[A] =
 .center[![Overview](img/flagged-flatmap-or.svg)]
 
 ```scala
-case class Flagged[A](value: A, flag: Boolean)
+type Flagged[A] = A×Boolean
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(a, false)
+  a×false
 
 def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-  val fb = f(fa.value)
-  Flagged(fb.value, `fa.flag || fb.flag`)
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 `||` x2
+
+  b×x3
 ```
 
 
@@ -2569,14 +2591,17 @@ def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
 .center[![Overview](img/flagged-flatmap.svg)]
 
 ```scala
-case class Flagged[A](value: A, flag: Boolean)
+type Flagged[A] = A×Boolean
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(a, false)
+  a×false
 
 def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-  val fb = f(fa.value)
-  Flagged(fb.value, fa.flag || fb.flag)
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 || x2
+
+  b×x3
 
 ```
 
@@ -2588,14 +2613,17 @@ def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
 
 .diff-rm[
 ```scala
-*case class Flagged[A](`value: A, `flag: Boolean)
+*type Flagged[A] = `A×`Boolean
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(`a, `false)
+* `a×`false
 
 def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-* val fb = f(`fa.value`)
-* Flagged(`fb.value, `fa.flag || fb.flag)
+* val (`a×`x1) = fa
+* val (`b×`x2) = f(a)
+  val x3     = x1 || x2
+
+* `b×`x3
 ```
 ]
 
@@ -2607,14 +2635,17 @@ def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
 
 .diff-rm[
 ```scala
-*case class Flagged[A](`value: A, `flag: Boolean)
+*type Flagged[A] = `A×`Boolean
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(`a, `false)
+* `a×`false
 *
 *&#x200B;`def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =`
-* `val fb = f(fa.value)`
-* `Flagged(fb.value, fa.flag || fb.flag)`
+* `val (a×x1) = fa`
+* `val (b×x2) = f(a)`
+* `val x3     = x1 || x2`
+*
+* `b×`x3
 ```
 ]
 
@@ -2625,10 +2656,10 @@ def pure[A](a: A): Flagged[A] =
 .center[![Overview](img/flagged-flatmap-removed-a.svg)]
 
 ```scala
-case class Flagged[A](flag: Boolean)
+type Flagged[A] = Boolean
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(false)
+  false
 ```
 
 ---
@@ -2638,10 +2669,10 @@ def pure[A](a: A): Flagged[A] =
 .center[![Overview](img/flagged-flatmap-done.svg)]
 
 ```scala
-case class Flagged[A](flag: Boolean)
+type Flagged[A] = Boolean
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(false)
+  false
 ```
 
 ---
@@ -2652,10 +2683,10 @@ def pure[A](a: A): Flagged[A] =
 
 .diff-rm[
 ```scala
-*case class `Flagged`[A](flag: Boolean)
+*type `Flagged`[A] = Boolean
 
 *def pure[A](a: A): `Flagged`[A] =
-* `Flagged`(false)
+  false
 ```
 ]
 
@@ -2667,10 +2698,10 @@ def pure[A](a: A): Flagged[A] =
 
 .diff-add[
 ```scala
-*case class `Flag`[A](flag: Boolean)
+*type `Flag`[A] = Boolean
 
 *def pure[A](a: A): `Flag`[A] =
-* `Flag`(false)
+  false
 ```
 ]
 
@@ -2682,10 +2713,10 @@ def pure[A](a: A): Flagged[A] =
 .center[![Overview](img/flag.svg)]
 
 ```scala
-case class Flag[A](flag: Boolean)
+type Flag[A] = Boolean
 
 def pure[A](a: A): Flag[A] =
-  Flag(false)
+  false
 
 ```
 
@@ -2747,35 +2778,152 @@ class: center, middle
 
 ## Flagged data
 
-.center[![Overview](img/flagged-pure.svg)]
+.center[![Overview](img/flagged-flatmap.svg)]
 
 ```scala
-case class Flagged[A](value: A, flag: Boolean)
+type Flagged[A] = A×Boolean
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(a, false)
+  a×false
 
 def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-  val fb = f(fa.value)
-  Flagged(fb.value, fa.flag || fb.flag)
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 || x2
+
+  b×x3
 ```
 
 ---
 
 ## Breaking flagged data
 
-.center[![Overview](img/flagged-pure-boolean.svg)]
+.center[![Overview](img/flagged-flatmap-boolean.svg)]
 
 .diff-rm[
 ```scala
-*case class Flagged[A](value: A, `flag: Boolean`)
+*type Flagged[A] = A×`Boolean`
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(a, false)
+  a×false
 
 def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-  val fb = f(fa.value)
-* Flagged(fb.value, fa.`flag` || fb.`flag`)
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 || x2
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-posint.svg)]
+
+.diff-add[
+```scala
+*type Flagged[A] = A×`PosInt`
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 || x2
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-combine.svg)]
+
+.diff-rm[
+```scala
+type Flagged[A] = A×PosInt
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+* val x3     = `x1 || x2`
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-plus.svg)]
+
+.diff-add[
+```scala
+type Flagged[A] = A×PosInt
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+* val x3     = `x1 + x2`
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-plus-done.svg)]
+
+.diff-add[
+```scala
+type Flagged[A] = A×PosInt
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
+```
+]
+
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-posint.svg)]
+
+.diff-add[
+```scala
+type Flagged[A] = A×PosInt
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
 ```
 ]
 
@@ -2785,16 +2933,19 @@ def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
 
 .center[![Overview](img/flagged-pure-posint.svg)]
 
-.diff-add[
+.diff-rm[
 ```scala
-*case class Flagged[A](value: A, `weight: PosInt`)
+type Flagged[A] = A×PosInt
 
 def pure[A](a: A): Flagged[A] =
-  Flagged(a, false)
+* a×`false`
 
 def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-  val fb = f(fa.value)
-* Flagged(fb.value, fa.`weight` || fb.`weight`)
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
 ```
 ]
 
@@ -2806,71 +2957,17 @@ def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
 
 .diff-rm[
 ```scala
-case class Flagged[A](value: A, weight: PosInt)
-
-def pure[A](a: A): Flagged[A] =
-  Flagged(a, false)
-
-def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-  val fb = f(fa.value)
-* Flagged(fb.value, fa.weight `||` fb.weight)
-```
-]
-
----
-
-## Breaking flagged data
-
-.center[![Overview](img/flagged-posint.svg)]
-
-.diff-add[
-```scala
-case class Flagged[A](value: A, weight: PosInt)
-
-def pure[A](a: A): Flagged[A] =
-  Flagged(a, false)
-
-def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-  val fb = f(fa.value)
-* Flagged(fb.value, fa.weight `+` fb.weight)
-```
-]
-
----
-
-## Breaking flagged data
-
-.center[![Overview](img/flagged-pure-posint.svg)]
-
-.diff-rm[
-```scala
-case class Flagged[A](value: A, weight: PosInt)
-
-def pure[A](a: A): Flagged[A] =
-* Flagged(a, `false`)
-
-def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-  val fb = f(fa.value)
-  Flagged(fb.value, fa.weight + fb.weight)
-```
-]
-
----
-
-## Breaking flagged data
-
-.center[![Overview](img/flagged-posint.svg)]
-
-.diff-rm[
-```scala
-case class Flagged[A](value: A, weight: PosInt)
+type Flagged[A] = A×PosInt
 *
 *&#x200B;`def pure[A](a: A): Flagged[A] =`
-* `Flagged(a, false)`
+* `a×false`
 
 def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-  val fb = f(fa.value)
-  Flagged(fb.value, fa.weight + fb.weight)
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
 ```
 ]
 
@@ -2881,11 +2978,14 @@ def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
 .center[![Overview](img/flagged-broken.svg)]
 
 ```scala
-case class Flagged[A](value: A, weight: PosInt)
+type Flagged[A] = A×PosInt
 
 def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
-  val fb = f(fa.value)
-  Flagged(fb.value, fa.weight + fb.weight)
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
 ```
 
 
@@ -2897,11 +2997,14 @@ def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
 
 .diff-rm[
 ```scala
-*case class `Flagged`[A](value: A, weight: PosInt)
+*type `Flagged`[A] = A×PosInt
 
 *def flatMap[A, B](f: A => `Flagged`[B])(fa: `Flagged`[A])`: Flagged[B]` =
-  val fb = f(fa.value)
-* `Flagged`(fb.value, fa.weight + fb.weight)
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
 ```
 ]
 
@@ -2913,11 +3016,14 @@ def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
 
 .diff-add[
 ```scala
-*case class `Weighted`[A](value: A, weight: PosInt)
+*type `Weighted`[A] = A×PosInt
 
 *def flatMap[A, B](f: A => `Weighted`[B])(fa: `Weighted`[A]) =
-  val fb = f(fa.value)
-* `Weighted`(fb.value, fa.weight + fb.weight)
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
 ```
 ]
 
@@ -2928,11 +3034,14 @@ def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
 .center[![Overview](img/weighted.svg)]
 
 ```scala
-case class Weighted[A](value: A, weight: PosInt)
+type Weighted[A] = A×PosInt
 
 def flatMap[A, B](f: A => Weighted[B])(fa: Weighted[A]) =
-  val fb = f(fa.value)
-  Weighted(fb.value, fa.weight + fb.weight)
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
 
 ```
 
