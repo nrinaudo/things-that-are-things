@@ -1,0 +1,13 @@
+digraph {
+    Start[class="extremity"]
+    Goal[class="extremity"]
+
+    A[group="upper" class="start"]
+    FA[label="F[A]" group="upper" class="goal,disabled"]
+    zero[label="X" style="invis"]
+    A -> FA[label="pure" class="disabled"]
+    zero -> FA[style="invis"]
+
+    Start -> A[class="start"]
+    FA -> Goal[class="goal,disabled"]
+}

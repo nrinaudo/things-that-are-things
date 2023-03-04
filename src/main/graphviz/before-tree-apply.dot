@@ -1,0 +1,15 @@
+digraph {
+    Nothing[label="Type Constructor"]
+    Functor
+    Apply
+    Applicative[style="invis"]
+    FlatMap[style="invis"]
+    Monad[style="invis"]
+
+    Nothing -> Functor[label="map"]
+    Functor -> Apply[label="map2"]
+    Apply -> Applicative[label="pure" style="invis"]
+    Apply -> FlatMap[label="flatMap" style="invis"]
+    Applicative -> Monad[label="flatMap" style="invis"]
+    FlatMap -> Monad[label="pure" style="invis"]
+}

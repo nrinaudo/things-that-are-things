@@ -1,0 +1,25 @@
+digraph {
+    Start[class="extremity"]
+    Goal[class="extremity"]
+
+    AB[label="A×B" style="invis"]
+    C[style="invis"]
+    FAFB[label="F[A]×F[B]" class="start,disabled"]
+    FC[label="F[C]" class="goal"]
+
+    FAFB -> FC[label="map2(f)" style="invis"]
+    AB -> C[label="f" style="invis"]
+
+    {
+        rank=same
+        FAFB -> AB[dir=back class="lift" style="invis"]
+    }
+
+    {
+        rank=same
+        FC -> C[dir=back class="lift" style="invis"]
+    }
+
+    Start -> FAFB[class="start,disabled"]
+    FC -> Goal[class="goal"]
+}

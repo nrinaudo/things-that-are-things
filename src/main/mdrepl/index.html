@@ -1,0 +1,3143 @@
+<!Doctype html>
+<html>
+    <head>
+        <title>Things that are things, but not other things</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+    </head>
+    <body>
+        <textarea id="source">
+class: center, middle
+
+# Things that are things, but not other things
+
+[Nicolas Rinaudo] • [@NicolasRinaudo@functional.cafe]
+
+```scala repl:invisible
+type X = Int
+type PosInt = Int
+```
+
+---
+
+## Method 1: theory
+
+.center[![Overview](img/before-tree-tc.svg)]
+
+---
+
+## Method 1: theory
+
+.center[![Overview](img/before-tree-functor.svg)]
+
+---
+
+## Method 1: theory
+
+.center[![Overview](img/before-tree-apply.svg)]
+
+---
+
+## Method 1: theory
+
+.center[![Overview](img/before-tree-applicative.svg)]
+
+---
+
+## Method 1: theory
+
+.center[![Overview](img/before-tree-flatmap.svg)]
+
+---
+
+## Method 1: theory
+
+.center[![Overview](img/tree.svg)]
+
+---
+
+## Method 2: examples
+
+.center[![Overview](img/tree-type-constructor.svg)]
+
+---
+
+## Method 2: examples
+
+.center[![Overview](img/tree-functor.svg)]
+
+---
+
+## Method 2: examples
+
+.center[![Overview](img/tree.svg)]
+
+---
+class: center, middle
+
+# Things that are things, but not other things
+
+[Nicolas Rinaudo] • [@NicolasRinaudo@functional.cafe]
+
+---
+class: center, middle
+
+# Warm up: not a Functor
+
+---
+
+## Functor
+
+.center[![Overview](img/tree-empty.svg)]
+
+---
+
+## Functor
+
+.center[![Overview](img/tree-before-functor.svg)]
+
+
+---
+
+## Functor
+
+.center[![Functor](img/functor-fa.svg)]
+
+```scala
+def map[A, B](f: A => B)(`fa: F[A]`): F[B]
+```
+
+---
+
+## Functor
+
+.center[![Functor](img/functor-fb.svg)]
+
+```scala
+def map[A, B](f: A => B)(fa: F[A]): `F[B]`
+```
+
+---
+
+## Functor
+
+.center[![Functor](img/functor-f.svg)]
+
+```scala
+def map[A, B](`f: A => B`)(fa: F[A]): F[B]
+```
+
+---
+
+## Functor
+
+.center[![Functor](img/functor-map.svg)]
+
+```scala
+def `map`[A, B](f: A => B)(fa: F[A]): F[B]
+```
+
+---
+
+## Functor
+
+.center[![Functor](img/functor.svg)]
+
+```scala
+def map[A, B](f: A => B)(fa: F[A]): F[B]
+```
+
+---
+
+## Function
+
+.center[![Overview](img/function-no-fb.svg)]
+
+```scala
+type F[A] = `X => A`
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+  ???
+```
+
+---
+
+## Function
+
+.center[![Overview](img/function-fa.svg)]
+
+```scala
+type F[A] = X => A
+
+def map[A, B](f: A => B)(`fa: F[A]`): F[B] =
+  ???
+```
+
+---
+
+## Function
+
+.center[![Overview](img/function-f.svg)]
+
+```scala
+type F[A] = X => A
+
+def map[A, B](`f: A => B`)(fa: F[A]): F[B] =
+  ???
+```
+
+
+---
+
+## Function
+
+.center[![Overview](img/function-fb.svg)]
+
+```scala
+type F[A] = X => A
+
+def map[A, B](f: A => B)(fa: F[A]): `F[B]` =
+  ???
+```
+
+---
+
+## Function
+
+.center[![Overview](img/function-no-fb.svg)]
+
+.diff-rm[
+```scala
+type F[A] = X => A
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+* `???`
+```
+]
+
+---
+
+## Function
+
+.center[![Overview](img/function.svg)]
+
+.diff-add[
+```scala
+type F[A] = X => A
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+* `fa andThen f`
+```
+]
+
+```scala repl:invisible
+type F[A] = X => A
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+  fa andThen f
+```
+
+---
+
+## Breaking Function
+
+.center[![Overview](img/function-before-flip.svg)]
+
+.diff-rm[
+```scala
+*type F[A] = `X => A`
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+  fa andThen f
+```
+]
+
+---
+
+## Breaking Function
+
+.center[![Overview](img/function-after-flip.svg)]
+
+.diff-add[
+```scala
+*type F[A] = `A => X`
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+  fa andThen f
+```
+]
+
+---
+
+## Breaking Function
+
+.center[![Overview](img/function-no-compose.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A => X
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+* `fa andThen f`
+```
+]
+
+---
+
+## Breaking Function
+
+.center[![Overview](img/function-no-compose-all.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A => X
+*
+*&#x200B;`def map[A, B](f: A => B)(fa: F[A]): F[B] =`
+* `fa andThen f`
+```
+]
+
+---
+
+## Breaking Function
+
+.center[![Overview](img/contra-function.svg)]
+
+```scala repl
+type F[A] = A => X
+```
+
+---
+
+## Breaking Function
+
+.center[![Overview](img/predicate-x.svg)]
+
+.diff-rm[
+```scala
+*type F[A] = A => `X`
+```
+]
+
+---
+
+## Breaking Function
+
+.center[![Overview](img/predicate-boolean.svg)]
+
+.diff-add[
+```scala
+*type F[A] = A => `Boolean`
+```
+]
+
+---
+
+## Breaking Function
+
+.center[![Overview](img/predicate-fa.svg)]
+
+.diff-rm[
+```scala
+*type `F[A]` = A => Boolean
+```
+]
+
+---
+
+## Predicate
+
+.center[![Overview](img/predicate-predicate.svg)]
+
+.diff-add[
+```scala
+*type `Predicate[A]` = A => Boolean
+```
+]
+
+
+---
+
+## Predicate
+
+.center[![Overview](img/predicate.svg)]
+
+```scala repl
+type Predicate[A] = A => Boolean
+```
+
+---
+
+## Key takeaways
+
+A function parameterised on its:
+
+--
+
+* output type is a `Functor`.
+
+--
+
+* input type is *not* a `Functor`.
+---
+class: center, middle
+
+# Interlude: product types
+
+---
+
+## Products
+
+.center[![Product type](img/product.svg)]
+
+```scala
+case class `×`[A, B](first: A, second: B)
+```
+
+---
+
+## Products
+
+.center[![Product type](img/product.svg)]
+
+```scala
+case class ×[A, B](`first: A`, second: B)
+```
+
+---
+
+## Products
+
+.center[![Product type](img/product.svg)]
+
+```scala
+case class ×[A, B](first: A, `second: B`)
+```
+
+```scala repl:invisible
+case class ×[A, B](first: A, second: B)
+extension [A](a: A) def ×[B](b: B): A×B = new ×(a, b)
+```
+
+---
+
+## Product introduction
+
+.center[![Product type](img/product-introduction-a-b.svg)]
+
+```scala
+def build[A, B](`a: A`, `b: B`): A×B =
+ a×b
+```
+
+---
+
+## Product introduction
+
+.center[![Product type](img/product-introduction-ab.svg)]
+
+```scala
+def build[A, B](a: A, b: B): `A×B` =
+ a×b
+```
+
+---
+
+## Product introduction
+
+.center[![Product type](img/product-introduction.svg)]
+
+```scala
+def build[A, B](a: A, b: B): A×B =
+ `a×b`
+```
+
+```scala repl:invisible
+def build[A, B](a: A, b: B): A×B =
+ a×b
+```
+
+---
+
+## Product elimination
+
+.center[![Product type](img/product-elimination-ab.svg)]
+
+```scala
+def print[A, B](ab: `A×B`) =
+  val a×b = ab
+
+  println(s"$a and $b")
+```
+
+---
+
+## Product elimination
+
+.center[![Product type](img/product-elimination-a-b.svg)]
+
+```scala
+def print[`A`, `B`](ab: A×B) =
+  val a×b = ab
+
+  println(s"$a and $b")
+```
+
+---
+
+## Product elimination
+
+.center[![Product type](img/product-elimination.svg)]
+
+```scala
+def print[A, B](ab: A×B) =
+  val `a×b` = ab
+
+  println(s"$a and $b")
+```
+
+```scala repl:invisible
+def print[A, B](ab: A×B) =
+  val a×b = ab
+
+  println(s"$a and $b")
+```
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-before.svg)]
+
+```scala
+type F[A] = `A×X`
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+  ???
+```
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-before-f.svg)]
+
+```scala
+type F[A] = A×X
+
+def map[A, B](`f: A => B`)(fa: F[A]): F[B] =
+  ???
+```
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-before-fa.svg)]
+
+```scala
+type F[A] = A×X
+
+def map[A, B](f: A => B)(`fa: F[A]`): F[B] =
+  ???
+```
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-before-fb.svg)]
+
+```scala
+type F[A] = A×X
+
+def map[A, B](f: A => B)(fa: F[A]): `F[B]` =
+  ???
+```
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-fb.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×X
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+* `???`
+```
+]
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-fb.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+* `(??? : B)×(??? : X)`
+```
+]
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-fa.svg)]
+
+```scala
+type F[A] = A×X
+
+def map[A, B](f: A => B)(`fa: F[A]`): F[B] =
+  (??? : B)×(??? : X)
+```
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-elimination.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+* `val (a×x) = fa`
+*
+  (??? : B)×(??? : X)
+```
+]
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-a-b.svg)]
+
+```scala
+type F[A] = A×X
+
+def map[A, B](`f: A => B`)(fa: F[A]): F[B] =
+  val (`a`×x) = fa
+
+  (??? : B)×(??? : X)
+```
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-a-b.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+  val (a×x) = fa
+* `val b     = f(a)`
+
+  (??? : B)×(??? : X)
+```
+]
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-introduction-before.svg)]
+
+```scala
+type F[A] = A×X
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+  val (a×`x`) = fa
+  val `b`     = f(a)
+
+  (??? : B)×(??? : X)
+```
+
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-introduction.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×X
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+  val (a×x) = fa
+  val b     = f(a)
+
+* `(??? : B)`×`(??? : X)`
+```
+]
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map-introduction.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+  val (a×x) = fa
+  val b     = f(a)
+
+* `b`×`x`
+```
+]
+
+---
+
+## Products are functors
+
+.center[![Overview](img/product-map.svg)]
+
+```scala repl
+type F[A] = A×X
+
+def map[A, B](f: A => B)(fa: F[A]): F[B] =
+  val (a×x) = fa
+  val b     = f(a)
+
+  b×x
+```
+
+---
+
+## Key takeaways
+
+A binary parametric product type is:
+
+--
+
+* a `Functor`.
+
+---
+class: center, middle
+
+# Functor but not Apply
+---
+
+## Apply
+
+.center[![Overview](img/tree-before-apply.svg)]
+
+---
+
+## Apply
+
+.center[![Overview](img/tree-before-apply-map.svg)]
+
+---
+
+## Apply
+
+.center[![Overview](img/tree-before-apply-map2.svg)]
+
+---
+
+## Apply
+
+.center[![Apply](img/apply-fa-fb.svg)]
+
+```scala
+def map2[A, B, C](f: (A, B) => C)(`fa: F[A], fb: F[B]`): F[C]
+```
+
+---
+
+## Apply
+
+.center[![Apply](img/apply-fc.svg)]
+
+```scala
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): `F[C]`
+```
+
+
+---
+
+## Apply
+
+.center[![Apply](img/apply-f.svg)]
+
+```scala
+def map2[A, B, C](`f: (A, B) => C`)(fa: F[A], fb: F[B]): F[C]
+```
+
+---
+
+## Apply
+
+.center[![Apply](img/apply-map.svg)]
+
+```scala
+def `map2`[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C]
+```
+
+---
+
+## Apply
+
+.center[![Apply](img/apply.svg)]
+
+```scala
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C]
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before.svg)]
+
+```scala
+type F[A] = `A×X`
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-f.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](`f: (A, B) => C`)(fa: F[A], fb: F[B]): F[C] =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-fafb.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(`fa: F[A], fb: F[B]`): F[C] =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-fc.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): `F[C]` =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-fc.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+* `???`
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-fc.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+* `(??? : C)×(??? : X)`
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-fafb.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(`fa: F[A], fb: F[B]`): F[C] =
+  (??? : C)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-fafb-elimination.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(`fa: F[A]`, `fb: F[B]`): F[C] =
+  (??? : C)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-fafb-elimination-2.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+* `val (a×x1) = fa`
+* `val (b×x2) = fb`
+*
+  (??? : C)×(??? : X)
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-elimination-2-x-x.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×`x1`) = fa
+  val (b×`x2`) = fb
+
+  (??? : C)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-elimination-2-a-b.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (`a`×x1) = fa
+  val (`b`×x2) = fb
+
+  (??? : C)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-ab-f.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](`f: (A, B) => C`)(fa: F[A], fb: F[B]): F[C] =
+  val (`a`×x1) = fa
+  val (`b`×x2) = fb
+
+  (??? : C)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-ab-f.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+* `val c      = f(a, b)`
+
+  (??? : C)×(??? : X)
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-x.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): `F[C]` =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+
+  (`??? : C`)×(`??? : X`)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-xx-x.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×`x1`) = fa
+  val (b×`x2`) = fb
+  val c      = f(a, b)
+
+  (??? : C)×(`??? : X`)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-combine.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+
+  (??? : C)×(??? : X)
+*
+*&#x200B;`def combine(lhs: X, rhs: X): X =`
+* `???`
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-combine.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+* `val x3     = combine(x1, x2)`
+
+  (??? : C)×(??? : X)
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-x-c.svg)]
+
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val `c`      = f(a, b)
+  val `x3`     = combine(x1, x2)
+
+  (??? : C)×(??? : X)
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-x-c-fc.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+  val x3     = combine(x1, x2)
+
+* `(??? : C)`×`(??? : X)`
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+---
+
+## Product
+
+.center[![Overview](img/product-map2-before-x-c-fc.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+  val x3     = combine(x1, x2)
+
+* `c`×`x3`
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-map2.svg)]
+
+```scala repl
+type F[A] = A×X
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+  val x3     = combine(x1, x2)
+
+  c×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/product-map2-all-xs.svg)]
+
+.diff-rm[
+```scala
+*type F[A] = A×`X`
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+  val x3     = combine(x1, x2)
+
+  c×x3
+
+*def combine(lhs: `X`, rhs: `X`): `X` =
+  ???
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/product-map2-all-str.svg)]
+
+.diff-add[
+```scala
+*type F[A] = A×`String`
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+  val x3     = combine(x1, x2)
+
+  c×x3
+
+*def combine(lhs: `String`, rhs: `String`): X =
+  ???
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/product-map2-string-combine.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×String
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+  val x3     = combine(x1, x2)
+
+  c×x3
+*
+*&#x200B;`def combine(lhs: String, rhs: String): String =`
+* `???`
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/product-map2-string-combine.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×String
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+* `val x3     = combine(x1, x2)`
+
+  c×x3
+*
+*&#x200B;`def combine(lhs: String, rhs: String): String =`
+* `???`
+```
+]
+
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/product-map2-string-combine-string-c.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×String
+
+def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
+  val (a×x1) = fa
+  val (b×x2) = fb
+  val c      = f(a, b)
+* `val x3     = combine(x1, x2)`
+
+* `c×x3`
+*
+*&#x200B;`def combine(lhs: String, rhs: String): String =`
+* `???`
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/product-map2-string-combine-string-c.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×String
+*
+*&#x200B;`def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =`
+* `val (a×x1) = fa`
+* `val (b×x2) = fb`
+* `val c      = f(a, b)`
+* `val x3     = combine(x1, x2)`
+*
+* `c×x3`
+*
+*&#x200B;`def combine(lhs: String, rhs: String): String =`
+* `???`
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/product-map2-string-no-combine.svg)]
+
+```scala
+type F[A] = A×String
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/product-map2-str-broken.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×String
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/product-map2-before-predicate.svg)]
+
+.diff-rm[
+```scala
+*type `F[A]` = A×String
+```
+]
+
+---
+
+## Labelled data
+
+.center[![Overview](img/product-map2-labelled-hl.svg)]
+
+.diff-add[
+```scala
+*type `Labelled[A]` = A×String
+```
+]
+
+
+
+---
+
+## Labelled data
+
+.center[![Overview](img/labelled.svg)]
+
+```scala repl
+type Labelled[A] = A×String
+```
+
+---
+
+## Key takeaways
+
+A binary parametric product type is:
+
+* a `Functor`.
+
+--
+
+* not an `Apply` if the other member is not a `Semigroup`.
+---
+class: center, middle
+
+# Apply but not Applicative
+---
+
+## Applicative
+
+.center[![Overview](img/tree-before-applicative.svg)]
+
+---
+
+## Applicative
+
+.center[![Overview](img/tree-before-applicative-map.svg)]
+
+---
+
+## Applicative
+
+.center[![Overview](img/tree-before-applicative-map2.svg)]
+
+---
+
+## Applicative
+
+.center[![Overview](img/tree-before-applicative-pure.svg)]
+
+---
+
+## Applicative
+
+.center[![Applicative](img/applicative-a.svg)]
+
+```scala
+def pure[A](`a: A`): F[A]
+```
+
+---
+
+## Applicative
+
+.center[![Applicative](img/applicative-fa.svg)]
+
+```scala
+def pure[A](a: A): `F[A]`
+```
+
+---
+
+## Applicative
+
+.center[![Applicative](img/applicative.svg)]
+
+```scala
+def `pure`[A](a: A): F[A]
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure-before.svg)]
+
+```scala
+type F[A] = `A×X`
+
+def pure[A](a: A): F[A] =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure-before-a.svg)]
+
+```scala
+type F[A] = A×X
+
+def pure[A](`a: A`): F[A] =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure-before-fa.svg)]
+
+```scala
+type F[A] = A×X
+
+def pure[A](a: A): `F[A]` =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure-before-fa.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×X
+
+def pure[A](a: A): F[A] =
+* `???`
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure-before-fa.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def pure[A](a: A): F[A] =
+* `(??? : A)×(??? : X)`
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure-before-a.svg)]
+
+```scala
+type F[A] = A×X
+
+def pure[A](`a: A`): F[A] =
+  (??? : A)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure-before-x.svg)]
+
+```scala
+type F[A] = A×X
+
+def pure[A](a: A): F[A] =
+  (??? : A)×`(??? : X)`
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure-before-x.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def pure[A](a: A): F[A] =
+  (??? : A)×(??? : X)
+*
+*&#x200B;`def empty: X =`
+* `???`
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×X
+
+def pure[A](a: A): F[A] =
+* `(??? : A)`×`(??? : X)`
+
+def empty: X =
+  ???
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def pure[A](a: A): F[A] =
+* `a`×`empty`
+
+def empty: X =
+  ???
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-pure.svg)]
+
+```scala repl
+type F[A] = A×X
+
+def pure[A](a: A): F[A] =
+  a×empty
+
+def empty: X =
+  ???
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weighted-before-x.svg)]
+
+.diff-rm[
+```scala
+*type F[A] = A×`X`
+
+def pure[A](a: A): F[A] =
+  a×empty
+
+*def empty: `X` =
+  ???
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weighted-before-positiveint.svg)]
+
+.diff-add[
+```scala
+*type F[A] = A×`PosInt`
+
+def pure[A](a: A): F[A] =
+  a×empty
+
+*def empty: `PosInt` =
+  ???
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weighted-before-positiveint-rm.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×PosInt
+
+def pure[A](a: A): F[A] =
+  a×empty
+*
+*&#x200B;`def empty: PosInt =`
+* `???`
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weighted-before-positiveint-rm.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×PosInt
+
+def pure[A](a: A): F[A] =
+* a×`empty`
+*
+*&#x200B;`def empty: PosInt =`
+* `???`
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weighted-before-no-positiveint.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×PosInt
+*
+*&#x200B;`def pure[A](a: A): F[A] =`
+* a×`empty`
+*
+*&#x200B;`def empty: PosInt =`
+* `???`
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weighted-before-name.svg)]
+
+```scala
+type F[A] = A×PosInt
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weighted-before-name-change.svg)]
+
+.diff-rm[
+```scala
+*type `F[A]` = A×PosInt
+```
+]
+
+---
+
+## Weighted data
+
+.center[![Overview](img/weighted-after-name-change.svg)]
+
+.diff-add[
+```scala
+*type `Weighted[A]` = A×PosInt
+```
+]
+
+---
+
+## Weighted data
+
+.center[![Overview](img/weighted.svg)]
+
+
+```scala repl
+type Weighted[A] = A×PosInt
+```
+
+---
+
+## Key takeaways
+
+A binary parametric product type is:
+
+* a `Functor`.
+
+* not an `Apply` if the other member is not a `Semigroup`.
+
+--
+
+* not an `Applicative` if the other member is not a `Monoid`.
+
+---
+class: center, middle
+
+# Apply but not FlatMap
+---
+
+## FlatMap
+
+.center[![Overview](img/tree-before-flatmap.svg)]
+
+---
+
+## FlatMap
+
+.center[![Overview](img/tree-before-flatmap-map.svg)]
+
+---
+
+## FlatMap
+
+.center[![Overview](img/tree-before-map2.svg)]
+
+
+---
+
+## FlatMap
+
+.center[![Overview](img/tree-before-flatmap-flatmap.svg)]
+
+---
+
+## FlatMap
+
+.center[![Overview](img/flatmap-fa.svg)]
+
+```scala
+def flatMap[B](f: A => F[B])(`fa: F[A]`): F[B]
+```
+
+---
+
+## FlatMap
+
+.center[![Overview](img/flatmap-fb.svg)]
+
+```scala
+def flatMap[B](f: A => F[B])(fa: F[A]): `F[B]`
+```
+
+---
+
+## FlatMap
+
+.center[![Overview](img/flatmap-f.svg)]
+
+```scala
+def flatMap[B](`f: A => F[B]`)(fa: F[A]): F[B]
+```
+
+---
+
+## FlatMap
+
+.center[![Overview](img/flatmap-flatmap.svg)]
+
+```scala
+def `flatMap`[B](f: A => F[B])(fa: F[A]): F[B]
+```
+
+---
+
+## FlatMap
+
+.center[![Overview](img/flatmap.svg)]
+
+```scala
+def flatMap[B](f: A => F[B])(fa: F[A]): F[B]
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before.svg)]
+
+```scala
+type F[A] = `A×X`
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  ???
+```
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fa.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(`fa: F[A]`): F[B] =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-f.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](`f: A => F[B]`)(fa: F[A]): F[B] =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fb.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): `F[B]` =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fb.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+* `???`
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fb.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+* `(??? : B)×(??? : X)`
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fa.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(`fa: F[A]`): F[B] =
+  (??? : B)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fa-elimination.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+* `val (a×x1) = fa`
+*
+  (??? : B)×(??? : X)
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fake-fb.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](`f: A => F[B]`)(fa: F[A]): F[B] =
+  val (`a`×x1) = fa
+
+  (??? : B)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fake-fb.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+* `val fb     = f(a)`
+
+  (??? : B)×(??? : X)
+```
+]
+
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fake-fb-x.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×`x1`) = fa
+  val fb     = f(a)
+
+  (??? : B)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fake-fb-fb.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val `fb`     = f(a)
+
+  (??? : B)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-real-fb.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val fb     = f(a)
+
+  (??? : B)×(??? : X)
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-real-fb-fb.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+* val `fb`     = f(a)
+
+  (??? : B)×(??? : X)
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-real-fb-elimination.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+* val `(b×x2)` = f(a)
+
+  (??? : B)×(??? : X)
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-combine.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+
+  (??? : B)×(??? : X)
+*
+*&#x200B;`def combine(lhs: X, rhs: X): X =`
+* `???`
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-combine.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+* `val x3     = combine(x1, x2)`
+
+  (??? : B)×(??? : X)
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-b-x.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val (`b`×x2) = f(a)
+  val `x3`     = combine(x1, x2)
+
+  (??? : B)×(??? : X)
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-b-x-fb.svg)]
+
+.diff-rm[
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = combine(x1, x2)
+
+* `(??? : B)`×`(??? : X)`
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-b-x-fb.svg)]
+
+.diff-add[
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = combine(x1, x2)
+
+* `b`×`x3`
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap.svg)]
+
+```scala repl
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = combine(x1, x2)
+
+  b×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-b.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = combine(x1, x2)
+
+  `b`×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-fb.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val `(b×x2)` = f(a)
+  val x3     = combine(x1, x2)
+
+  b×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-a-f-fb.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val (b×x2) = `f(a)`
+  val x3     = combine(x1, x2)
+
+  b×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-fa-a.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val `(a×x1)` = fa
+  val (b×x2) = f(a)
+  val x3     = combine(x1, x2)
+
+  b×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-fa-a.svg)]
+
+```scala
+type F[A] = `A`×X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = combine(x1, x2)
+
+  b×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-fa-a.svg)]
+
+.diff-rm[
+```scala
+*type F[A] = `A×`X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = combine(x1, x2)
+
+  b×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-fa-a.svg)]
+
+.diff-rm[
+```scala
+*type F[A] = `A×`X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+* val (`a`×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = combine(x1, x2)
+
+  b×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-fa-a.svg)]
+
+.diff-rm[
+```scala
+*type F[A] = `A×`X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+* val (`a`×x1) = fa
+* val (b×x2) = `f(a)`
+  val x3     = combine(x1, x2)
+
+  b×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-fa-a-f-fb.svg)]
+
+.diff-rm[
+```scala
+*type F[A] = `A×`X
+
+def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
+* val (`a`×x1) = fa
+* `val (b×x2) = f(a)`
+  val x3     = combine(x1, x2)
+
+  b×x3
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-removing-flatmap.svg)]
+
+.diff-rm[
+```scala
+*type F[A] = `A×`X
+*
+*&#x200B;`def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =`
+* `val (a×x1) = fa`
+* `val (b×x2) = f(a)`
+* `val x3     = combine(x1, x2)`
+*
+* `b×x3`
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-no-a-before-rename.svg)]
+
+```scala
+type F[A] = X
+
+def combine(lhs: X, rhs: X): X =
+  ???
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-x.svg)]
+
+.diff-rm[
+```scala
+*type F[A] = `X`
+
+*def combine(lhs: `X`, rhs: `X`): `X` =
+  ???
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-posint.svg)]
+
+.diff-add[
+```scala
+*type F[A] = `PosInt`
+
+*def combine(lhs: `PosInt`, rhs: `PosInt`): `PosInt` =
+  ???
+```
+]
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-no-a.svg)]
+
+```scala
+type F[A] = PosInt
+
+def combine(lhs: PosInt, rhs: PosInt): PosInt =
+  ???
+```
+
+---
+
+## Breaking Product
+
+.center[![Overview](img/weight-before-name-change.svg)]
+
+.diff-rm[
+```scala
+*type `F[A]` = PosInt
+
+def combine(lhs: PosInt, rhs: PosInt): PosInt =
+  ???
+```
+]
+
+---
+
+## Weight
+
+.center[![Overview](img/weight-after-name-change.svg)]
+
+.diff-add[
+```scala
+*type `Weight[A]` = PosInt
+
+def combine(lhs: PosInt, rhs: PosInt): PosInt =
+  ???
+```
+]
+
+---
+
+## Weight
+
+.center[![Overview](img/weight.svg)]
+
+```scala repl
+type Weight[A] = PosInt
+
+def combine(lhs: PosInt, rhs: PosInt): PosInt =
+  ???
+```
+
+---
+
+## Key takeaways
+
+A binary parametric product type is:
+
+* a `Functor`.
+
+* not an `Apply` if the other member is not a `Semigroup`.
+
+* not an `Applicative` if the other member is not a `Monoid`.
+
+--
+
+* not a `FlatMap` if an `Apply` with a phantom type.
+
+---
+class: center, middle
+
+# Applicative but not Monad
+
+---
+
+## Monad
+
+.center[![Overview](img/tree-before-monad-through-applicative.svg)]
+
+---
+
+## Monad
+
+.center[![Overview](img/tree-before-monad-through-applicative-map.svg)]
+
+---
+
+## Monad
+
+.center[![Overview](img/tree-before-monad-through-applicative-map2.svg)]
+
+---
+
+## Monad
+
+.center[![Overview](img/tree-before-monad-through-applicative-pure.svg)]
+
+
+
+---
+
+## Monad
+
+.center[![Overview](img/tree-before-monad-through-applicative-flatmap.svg)]
+
+---
+
+## Flagged data
+
+.center[![Overview](img/flagged-pure-flagged.svg)]
+
+```scala
+type `Flagged[A]` = A×Boolean
+```
+
+---
+
+## Flagged data
+
+.center[![Overview](img/flagged-pure-a.svg)]
+
+```scala
+type Flagged[A] = `A`×Boolean
+```
+
+---
+
+## Flagged data
+
+.center[![Overview](img/flagged-pure-boolean.svg)]
+
+```scala
+type Flagged[A] = A×`Boolean`
+```
+
+
+---
+
+## Flagged data
+
+.center[![Overview](img/flagged-pure.svg)]
+
+.diff-add[
+```scala
+type Flagged[A] = A×Boolean
+
+*&#x200B;`def pure[A](a: A): Flagged[A] =`
+* `a×false`
+```
+]
+
+---
+
+## Flagged data
+
+.center[![Overview](img/flagged-pure.svg)]
+
+```scala
+type Flagged[A] = A×Boolean
+
+def pure[A](a: A): Flagged[A] =
+  a×`false`
+```
+
+---
+
+## Flagged data
+
+.center[![Overview](img/flagged-flatmap.svg)]
+
+.diff-add[
+```scala
+type Flagged[A] = A×Boolean
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+*
+*&#x200B;`def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =`
+* `val (a×x1) = fa`
+* `val (b×x2) = f(a)`
+* `val x3     = x1 || x2`
+*
+* `b×x3`
+```
+]
+
+---
+
+## Flagged data
+
+.center[![Overview](img/flagged-flatmap-or.svg)]
+
+```scala
+type Flagged[A] = A×Boolean
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 `||` x2
+
+  b×x3
+```
+
+
+---
+
+## Flagged data
+
+.center[![Overview](img/flagged-flatmap.svg)]
+
+```scala repl
+type Flagged[A] = A×Boolean
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 || x2
+
+  b×x3
+```
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-removing-a.svg)]
+
+.diff-rm[
+```scala
+*type Flagged[A] = `A×`Boolean
+
+def pure[A](a: A): Flagged[A] =
+* `a×`false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+* val (`a×`x1) = fa
+* val (`b×`x2) = f(a)
+  val x3     = x1 || x2
+
+* `b×`x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-removing-a-2.svg)]
+
+.diff-rm[
+```scala
+*type Flagged[A] = `A×`Boolean
+
+def pure[A](a: A): Flagged[A] =
+* `a×`false
+*
+*&#x200B;`def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =`
+* `val (a×x1) = fa`
+* `val (b×x2) = f(a)`
+* `val x3     = x1 || x2`
+*
+* `b×`x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-removed-a.svg)]
+
+```scala
+type Flagged[A] = Boolean
+
+def pure[A](a: A): Flagged[A] =
+  false
+```
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-done.svg)]
+
+```scala
+type Flagged[A] = Boolean
+
+def pure[A](a: A): Flagged[A] =
+  false
+```
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-done-flagged.svg)]
+
+.diff-rm[
+```scala
+*type `Flagged`[A] = Boolean
+
+*def pure[A](a: A): `Flagged`[A] =
+  false
+```
+]
+
+---
+
+## Flag
+
+.center[![Overview](img/flag-flag.svg)]
+
+.diff-add[
+```scala
+*type `Flag`[A] = Boolean
+
+*def pure[A](a: A): `Flag`[A] =
+  false
+```
+]
+
+---
+
+
+## Flag
+
+.center[![Overview](img/flag.svg)]
+
+```scala repl
+type Flag[A] = Boolean
+
+def pure[A](a: A): Flag[A] =
+  false
+```
+
+
+---
+
+## Key takeaways
+
+A binary parametric product type is:
+
+* a `Functor`.
+
+* not an `Apply` if the other member is not a `Semigroup`.
+
+* not an `Applicative` if the other member is not a `Monoid`.
+
+* not a `FlatMap` if an `Apply` with a phantom type.
+
+--
+
+* not a `Monad` if an `Applicative` with a phantom type.
+
+---
+class: center, middle
+
+# FlatMap but not Monad
+
+---
+
+## Monad
+
+.center[![Overview](img/tree-before-monad-through-flatmap.svg)]
+
+---
+
+## Monad
+
+.center[![Overview](img/tree-before-monad-through-flatmap-map.svg)]
+
+---
+
+## Monad
+
+.center[![Overview](img/tree-before-monad-through-flatmap-map2.svg)]
+
+---
+
+## Monad
+
+.center[![Overview](img/tree-before-monad-through-flatmap-flatmap.svg)]
+
+
+---
+
+## Monad
+
+.center[![Overview](img/tree-before-monad-through-flatmap-pure.svg)]
+
+---
+
+## Flagged data
+
+.center[![Overview](img/flagged-flatmap.svg)]
+
+```scala
+type Flagged[A] = A×Boolean
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 || x2
+
+  b×x3
+```
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-boolean.svg)]
+
+.diff-rm[
+```scala
+*type Flagged[A] = A×`Boolean`
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 || x2
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-posint.svg)]
+
+.diff-add[
+```scala
+*type Flagged[A] = A×`PosInt`
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 || x2
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-combine.svg)]
+
+.diff-rm[
+```scala
+type Flagged[A] = A×PosInt
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+* val x3     = `x1 || x2`
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-plus.svg)]
+
+.diff-add[
+```scala
+type Flagged[A] = A×PosInt
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+* val x3     = `x1 + x2`
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-flatmap-plus-done.svg)]
+
+.diff-add[
+```scala
+type Flagged[A] = A×PosInt
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
+```
+]
+
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-posint.svg)]
+
+.diff-add[
+```scala
+type Flagged[A] = A×PosInt
+
+def pure[A](a: A): Flagged[A] =
+  a×false
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-pure-posint.svg)]
+
+.diff-rm[
+```scala
+type Flagged[A] = A×PosInt
+
+def pure[A](a: A): Flagged[A] =
+* a×`false`
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-posint.svg)]
+
+.diff-rm[
+```scala
+type Flagged[A] = A×PosInt
+*
+*&#x200B;`def pure[A](a: A): Flagged[A] =`
+* `a×false`
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
+```
+]
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-broken.svg)]
+
+```scala
+type Flagged[A] = A×PosInt
+
+def flatMap[A, B](f: A => Flagged[B])(fa: Flagged[A]): Flagged[B] =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
+```
+
+
+---
+
+## Breaking flagged data
+
+.center[![Overview](img/flagged-before-rename.svg)]
+
+.diff-rm[
+```scala
+*type `Flagged`[A] = A×PosInt
+
+*def flatMap[A, B](f: A => `Flagged`[B])(fa: `Flagged`[A])`: Flagged[B]` =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
+```
+]
+
+---
+
+## Weighted data
+
+.center[![Overview](img/flagged-renamed.svg)]
+
+.diff-add[
+```scala
+*type `Weighted`[A] = A×PosInt
+
+*def flatMap[A, B](f: A => `Weighted`[B])(fa: `Weighted`[A]) =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
+```
+]
+
+---
+
+## Weighted data
+
+.center[![Overview](img/weighted.svg)]
+
+```scala repl
+type Weighted[A] = A×PosInt
+
+def flatMap[A, B](f: A => Weighted[B])(fa: Weighted[A]) =
+  val (a×x1) = fa
+  val (b×x2) = f(a)
+  val x3     = x1 + x2
+
+  b×x3
+```
+
+---
+
+## Key takeaways
+
+A binary parametric product type is:
+
+* a `Functor`.
+
+* not an `Apply` if the other member is not a `Semigroup`.
+
+* not an `Applicative` if the other member is not a `Monoid`.
+
+* not a `FlatMap` if an `Apply` with a phantom type.
+
+* not a `Monad` if an `Applicative` with a phantom type.
+
+--
+
+* not a `Monad` if a `FlatMap` and the other member is not a `Monoid`.
+
+---
+class: center, middle
+name: questions
+
+[<img src="img/qr-code.svg" width="50%" height="50%"/>][Slides]
+
+[Nicolas Rinaudo] • [@NicolasRinaudo@functional.cafe]
+[@NicolasRinaudo@functional.cafe]:https://functional.cafe/@NicolasRinaudo
+[Nicolas Rinaudo]:https://nrinaudo.github.io/
+[Slides]:https://nrinaudo.github.io/things-that-are-things/
+    </textarea>
+    <script src="js/remark.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+        var slideshow = remark.create({
+          highlightStyle: 'github',
+          highlightSpans: true,
+          highlightLines: true
+      });
+    </script>
+  </body>
+</html>

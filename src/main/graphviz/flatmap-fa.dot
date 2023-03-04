@@ -1,0 +1,19 @@
+digraph {
+    Start[class="extremity"]
+    Goal[class="extremity"]
+
+    FA[label="F[A]" group="lower" class="start"]
+    FB[label="F[B]" group="upper" class="goal" style="invis"]
+    A[group="upper" style="invis"]
+
+    A -> FB[label="f" style="invis"]
+    FA -> FB[label="flatMap(f)" style="invis"]
+
+    {
+        rank=same
+        A -> FA[class="lift" style="invis"]
+    }
+
+    Start -> FA[class="start"]
+    FB -> Goal[class="goal" style="invis"]
+}

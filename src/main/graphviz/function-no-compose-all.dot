@@ -1,0 +1,22 @@
+digraph {
+    X[group="upper"]
+    X2[group="lower" style="invis"]
+
+    A[group="upper"]
+    B[group="lower"]
+
+    {
+      rank=same
+       X -> X2[style="invis"]
+    }
+
+
+    {
+      rank=same
+       A -> B[label="f" class="disabled"]
+    }
+
+    X -> A[label="F[A]" class="start,disabled" dir="back"]
+    X -> B[label="F[B]" class="goal" dir="back"]
+    X2 -> B[style="invis"]
+}

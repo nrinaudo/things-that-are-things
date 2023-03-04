@@ -1,0 +1,15 @@
+digraph {
+    A1[label="A" style="invis"]
+    A2[label="A"]
+
+    B1[label="B" style="invis"]
+    B2[label="B"]
+
+    AB[label="A×B" class="goal,disabled"]
+
+    A1 -> AB[style="invis"]
+    B1 -> AB[style="invis"]
+
+    AB -> A2[class="disabled"]
+    AB -> B2[class="disabled"]
+}

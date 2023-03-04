@@ -1,0 +1,31 @@
+digraph {
+    Start[class="extremity"]
+    Goal[class="extremity"]
+
+    FA[label="F[A]" group="upper" class="start,disabled"]
+    FB[label="F[B]" group="upper" class="goal,disabled"]
+
+    A[group="lower"]
+    B[group="lower"]
+    X[group="upper" class="disabled"]
+
+    {
+        rank=same
+        FB -> B[dir="back" style="invis"]
+    }
+
+        {
+        rank=same
+        FA -> A[class="disabled"]
+    }
+
+
+    FA -> X[class="disabled"]
+
+    A -> B[label="f"]
+    X -> FB[style="invis"]
+
+
+    Start -> FA[class="start,disabled"]
+    FB -> Goal[class="goal,disabled"]
+}
