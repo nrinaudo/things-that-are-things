@@ -15,27 +15,75 @@ class: center, middle
 
 ---
 
-## Overview
+## Method 1: theory
+
+.center[![Overview](img/before-tree-tc.svg)]
+
+---
+
+## Method 1: theory
+
+.center[![Overview](img/before-tree-functor.svg)]
+
+---
+
+## Method 1: theory
+
+.center[![Overview](img/before-tree-apply.svg)]
+
+---
+
+## Method 1: theory
+
+.center[![Overview](img/before-tree-applicative.svg)]
+
+---
+
+## Method 1: theory
+
+.center[![Overview](img/before-tree-flatmap.svg)]
+
+---
+
+## Method 1: theory
 
 .center[![Overview](img/tree.svg)]
 
 ---
 
-## Overview
+## Method 2: examples
 
 .center[![Overview](img/tree-type-constructor.svg)]
 
 ---
 
-## Overview
+## Method 2: examples
 
-.center[![Overview](img/tree-monad.svg)]
+.center[![Overview](img/tree-functor.svg)]
 
+---
+
+## Method 2: examples
+
+.center[![Overview](img/tree.svg)]
+
+---
+class: center, middle
+
+# Things that are things, but not other things
+
+[Nicolas Rinaudo] • [@NicolasRinaudo@functional.cafe]
 
 ---
 class: center, middle
 
 # Warm up: not a Functor
+
+---
+
+## Functor
+
+.center[![Overview](img/tree-empty.svg)]
 
 ---
 
@@ -321,8 +369,6 @@ A function parameterised on its:
 --
 
 * input type is *not* a `Functor`.
-
-
 ---
 class: center, middle
 
@@ -546,7 +592,7 @@ def map[A, B](f: A => B)(fa: F[A]): F[B] =
 
 ## Products are functors
 
-.center[![Overview](img/product-map-fa-b.svg)]
+.center[![Overview](img/product-map-a-b.svg)]
 
 ```scala
 type F[A] = A×X
@@ -561,7 +607,7 @@ def map[A, B](`f: A => B`)(fa: F[A]): F[B] =
 
 ## Products are functors
 
-.center[![Overview](img/product-map-fa-b.svg)]
+.center[![Overview](img/product-map-a-b.svg)]
 
 .diff-add[
 ```scala
@@ -596,7 +642,7 @@ def map[A, B](f: A => B)(fa: F[A]): F[B] =
 
 ## Products are functors
 
-.center[![Overview](img/product-map-introduction-before.svg)]
+.center[![Overview](img/product-map-introduction.svg)]
 
 .diff-rm[
 ```scala
@@ -1339,16 +1385,6 @@ def pure[A](`a: A`): F[A]
 
 ## Applicative
 
-.center[![Applicative](img/applicative-pure.svg)]
-
-```scala
-def `pure`[A](a: A): F[A]
-```
-
----
-
-## Applicative
-
 .center[![Applicative](img/applicative-fa.svg)]
 
 ```scala
@@ -1362,7 +1398,7 @@ def pure[A](a: A): `F[A]`
 .center[![Applicative](img/applicative.svg)]
 
 ```scala
-def pure[A](a: A): F[A]
+def `pure`[A](a: A): F[A]
 ```
 
 ---
@@ -1771,6 +1807,18 @@ type F[A] = `A×X`
 def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
   ???
 ```
+---
+
+## Product
+
+.center[![Overview](img/product-flatmap-before-fa.svg)]
+
+```scala
+type F[A] = A×X
+
+def flatMap[A, B](f: A => F[B])(`fa: F[A]`): F[B] =
+  ???
+```
 
 ---
 
@@ -1782,19 +1830,6 @@ def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
 type F[A] = A×X
 
 def flatMap[A, B](`f: A => F[B]`)(fa: F[A]): F[B] =
-  ???
-```
-
----
-
-## Product
-
-.center[![Overview](img/product-flatmap-before-fa.svg)]
-
-```scala
-type F[A] = A×X
-
-def flatMap[A, B](f: A => F[B])(`fa: F[A]`): F[B] =
   ???
 ```
 
@@ -1880,8 +1915,8 @@ def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
 ```scala
 type F[A] = A×X
 
-def flatMap[A, B](f: A => F[B])(fa: F[A]): F[B] =
-  val (a×x1) = fa
+def flatMap[A, B](`f: A => F[B]`)(fa: F[A]): F[B] =
+  val (`a`×x1) = fa
 
   (??? : B)×(??? : X)
 ```
@@ -3072,7 +3107,7 @@ name: questions
 [<img src="img/qr-code.svg" width="50%" height="50%"/>][Slides]
 
 [Nicolas Rinaudo] • [@NicolasRinaudo@functional.cafe]
-[@NicolasRinaudo@functional.cafe]:https://twitter.com/NicolasRinaudo
+[@NicolasRinaudo@functional.cafe]:https://functional.cafe/@NicolasRinaudo
 [Nicolas Rinaudo]:https://nrinaudo.github.io/
 [Slides]:https://nrinaudo.github.io/things-that-are-things/
     </textarea>

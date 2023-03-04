@@ -10,16 +10,16 @@
 <title>%3</title>
 <!-- Start -->
 <!-- FA -->
-<g id="node3" class="node start">
+<g id="node3" class="node start,disabled">
 <title>FA</title>
-<path fill="#586e75" stroke="#586e75" d="M82.6,-36C82.6,-36 52.6,-36 52.6,-36 46.6,-36 40.6,-30 40.6,-24 40.6,-24 40.6,-12 40.6,-12 40.6,-6 46.6,0 52.6,0 52.6,0 82.6,0 82.6,0 88.6,0 94.6,-6 94.6,-12 94.6,-12 94.6,-24 94.6,-24 94.6,-30 88.6,-36 82.6,-36"/>
+<path fill="#d0dce3" stroke="#d0dce3" d="M82.6,-36C82.6,-36 52.6,-36 52.6,-36 46.6,-36 40.6,-30 40.6,-24 40.6,-24 40.6,-12 40.6,-12 40.6,-6 46.6,0 52.6,0 52.6,0 82.6,0 82.6,0 88.6,0 94.6,-6 94.6,-12 94.6,-12 94.6,-24 94.6,-24 94.6,-30 88.6,-36 82.6,-36"/>
 <text text-anchor="middle" x="67.6" y="-14.3" font-family="Inter,Arial" font-size="14.00" fill="#ffffff">F[A]</text>
 </g>
 <!-- Start&#45;&gt;FA -->
-<g id="edge5" class="edge start">
+<g id="edge5" class="edge start,disabled">
 <title>Start&#45;&gt;FA</title>
-<path fill="none" stroke="#586e75" stroke-width="2" d="M3.91,-18C7.37,-18 18.49,-18 30.42,-18"/>
-<polygon fill="#586e75" stroke="#586e75" stroke-width="2" points="30.48,-21.5 40.48,-18 30.48,-14.5 30.48,-21.5"/>
+<path fill="none" stroke="#d0dce3" stroke-width="2" d="M3.91,-18C7.37,-18 18.49,-18 30.42,-18"/>
+<polygon fill="#d0dce3" stroke="#d0dce3" stroke-width="2" points="30.48,-21.5 40.48,-18 30.48,-14.5 30.48,-21.5"/>
 </g>
 <!-- Goal -->
 <!-- XX -->
@@ -41,10 +41,10 @@
 <text text-anchor="middle" x="67.6" y="-86.3" font-family="Inter,Arial" font-size="14.00" fill="#586e75">A</text>
 </g>
 <!-- A&#45;&gt;FA -->
-<g id="edge1" class="edge">
+<g id="edge1" class="edge disabled">
 <title>A&#45;&gt;FA</title>
-<path fill="none" stroke="#586e75" d="M67.6,-61.92C67.6,-53.37 67.6,-44.83 67.6,-36.28"/>
-<polygon fill="#586e75" stroke="#586e75" points="64.1,-61.95 67.6,-71.95 71.1,-61.95 64.1,-61.95"/>
+<path fill="none" stroke="#d0dce3" d="M67.6,-61.92C67.6,-53.37 67.6,-44.83 67.6,-36.28"/>
+<polygon fill="#d0dce3" stroke="#d0dce3" points="64.1,-61.95 67.6,-71.95 71.1,-61.95 64.1,-61.95"/>
 </g>
 <!-- FB -->
 <g id="node5" class="node goal">

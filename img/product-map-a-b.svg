@@ -10,16 +10,16 @@
 <title>%3</title>
 <!-- Start -->
 <!-- FA -->
-<g id="node3" class="node start">
+<g id="node3" class="node start,disabled">
 <title>FA</title>
-<path fill="#586e75" stroke="#586e75" d="M82.6,-108C82.6,-108 52.6,-108 52.6,-108 46.6,-108 40.6,-102 40.6,-96 40.6,-96 40.6,-84 40.6,-84 40.6,-78 46.6,-72 52.6,-72 52.6,-72 82.6,-72 82.6,-72 88.6,-72 94.6,-78 94.6,-84 94.6,-84 94.6,-96 94.6,-96 94.6,-102 88.6,-108 82.6,-108"/>
+<path fill="#d0dce3" stroke="#d0dce3" d="M82.6,-108C82.6,-108 52.6,-108 52.6,-108 46.6,-108 40.6,-102 40.6,-96 40.6,-96 40.6,-84 40.6,-84 40.6,-78 46.6,-72 52.6,-72 52.6,-72 82.6,-72 82.6,-72 88.6,-72 94.6,-78 94.6,-84 94.6,-84 94.6,-96 94.6,-96 94.6,-102 88.6,-108 82.6,-108"/>
 <text text-anchor="middle" x="67.6" y="-86.3" font-family="Inter,Arial" font-size="14.00" fill="#ffffff">F[A]</text>
 </g>
 <!-- Start&#45;&gt;FA -->
-<g id="edge6" class="edge start">
+<g id="edge6" class="edge start,disabled">
 <title>Start&#45;&gt;FA</title>
-<path fill="none" stroke="#586e75" stroke-width="2" d="M3.91,-90C7.37,-90 18.49,-90 30.42,-90"/>
-<polygon fill="#586e75" stroke="#586e75" stroke-width="2" points="30.48,-93.5 40.48,-90 30.48,-86.5 30.48,-93.5"/>
+<path fill="none" stroke="#d0dce3" stroke-width="2" d="M3.91,-90C7.37,-90 18.49,-90 30.42,-90"/>
+<polygon fill="#d0dce3" stroke="#d0dce3" stroke-width="2" points="30.48,-93.5 40.48,-90 30.48,-86.5 30.48,-93.5"/>
 </g>
 <!-- Goal -->
 <!-- A -->
@@ -29,10 +29,10 @@
 <text text-anchor="middle" x="67.6" y="-14.3" font-family="Inter,Arial" font-size="14.00" fill="#586e75">A</text>
 </g>
 <!-- FA&#45;&gt;A -->
-<g id="edge2" class="edge">
+<g id="edge2" class="edge disabled">
 <title>FA&#45;&gt;A</title>
-<path fill="none" stroke="#586e75" d="M67.6,-71.95C67.6,-63.41 67.6,-54.86 67.6,-46.31"/>
-<polygon fill="#586e75" stroke="#586e75" points="71.1,-46.28 67.6,-36.28 64.1,-46.28 71.1,-46.28"/>
+<path fill="none" stroke="#d0dce3" d="M67.6,-71.95C67.6,-63.41 67.6,-54.86 67.6,-46.31"/>
+<polygon fill="#d0dce3" stroke="#d0dce3" points="71.1,-46.28 67.6,-36.28 64.1,-46.28 71.1,-46.28"/>
 </g>
 <!-- X -->
 <g id="node7" class="node disabled">
