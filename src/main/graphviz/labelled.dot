@@ -5,10 +5,10 @@ digraph {
     FAFB[label="Labelled[A]×Labelled[B]" class="start"]
     FA[label="Labelled[A]"]
     FB[label="Labelled[B]"]
-    XX[label="String×String"]
+    XX[label="Label×Label"]
     AB[label="A×B"]
     FC[label="Labelled[C]" class="goal"]
-    X[label="String" style="invis"]
+    X[label="Label" style="invis"]
 
     {
         rank=same

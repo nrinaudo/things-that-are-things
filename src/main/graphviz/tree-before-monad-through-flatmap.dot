@@ -4,12 +4,12 @@ digraph {
     Apply
     Applicative[class="disabled"]
     FlatMap
-    Monad[class="impossible"]
+    Monad[class="impossible,disabled"]
 
     Nothing -> Functor[label="map"]
     Functor -> Apply[label="map2"]
     Apply -> Applicative[label="pure" class="disabled"]
     Apply -> FlatMap[label="flatMap"]
     Applicative -> Monad[label="flatMap" class="disabled"]
-    FlatMap -> Monad[label="pure" class="impossible"]
+    FlatMap -> Monad[label="pure" class="impossible,disabled"]
 }
