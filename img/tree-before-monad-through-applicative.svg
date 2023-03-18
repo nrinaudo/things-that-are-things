@@ -67,17 +67,17 @@
 <text text-anchor="middle" x="393" y="-36.2" font-family="Inter,Arial" font-size="11.00" fill="#d0dce3">flatMap</text>
 </g>
 <!-- Monad -->
-<g id="node6" class="node impossible">
+<g id="node6" class="node impossible,disabled">
 <title>Monad</title>
-<path fill="none" stroke="#586e75" stroke-dasharray="5,2" d="M630,-62C630,-62 595,-62 595,-62 589,-62 583,-56 583,-50 583,-50 583,-38 583,-38 583,-32 589,-26 595,-26 595,-26 630,-26 630,-26 636,-26 642,-32 642,-38 642,-38 642,-50 642,-50 642,-56 636,-62 630,-62"/>
-<text text-anchor="middle" x="612.5" y="-40.3" font-family="Inter,Arial" font-size="14.00" fill="#586e75">Monad</text>
+<path fill="none" stroke="#d0dce3" stroke-dasharray="5,2" d="M630,-62C630,-62 595,-62 595,-62 589,-62 583,-56 583,-50 583,-50 583,-38 583,-38 583,-32 589,-26 595,-26 595,-26 630,-26 630,-26 636,-26 642,-32 642,-38 642,-38 642,-50 642,-50 642,-56 636,-62 630,-62"/>
+<text text-anchor="middle" x="612.5" y="-40.3" font-family="Inter,Arial" font-size="14.00" fill="#d0dce3">Monad</text>
 </g>
 <!-- Applicative&#45;&gt;Monad -->
-<g id="edge5" class="edge impossible">
+<g id="edge5" class="edge impossible,disabled">
 <title>Applicative&#45;&gt;Monad</title>
-<path fill="none" stroke="#586e75" stroke-dasharray="1,5" d="M511.26,-63.98C530.65,-60.11 553.78,-55.5 572.93,-51.69"/>
-<polygon fill="#586e75" stroke="#586e75" points="573.71,-55.1 582.83,-49.71 572.34,-48.23 573.71,-55.1"/>
-<text text-anchor="middle" x="547" y="-62.2" font-family="Inter,Arial" font-size="11.00" fill="#586e75">flatMap</text>
+<path fill="none" stroke="#d0dce3" stroke-dasharray="1,5" d="M511.26,-63.98C530.65,-60.11 553.78,-55.5 572.93,-51.69"/>
+<polygon fill="#d0dce3" stroke="#d0dce3" points="573.71,-55.1 582.83,-49.71 572.34,-48.23 573.71,-55.1"/>
+<text text-anchor="middle" x="547" y="-62.2" font-family="Inter,Arial" font-size="11.00" fill="#d0dce3">flatMap</text>
 </g>
 <!-- FlatMap&#45;&gt;Monad -->
 </g>

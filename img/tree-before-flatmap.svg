@@ -54,17 +54,17 @@
 <text text-anchor="middle" x="393" y="-62.2" font-family="Inter,Arial" font-size="11.00" fill="#d0dce3">pure</text>
 </g>
 <!-- FlatMap -->
-<g id="node5" class="node impossible">
+<g id="node5" class="node impossible,disabled">
 <title>FlatMap</title>
-<path fill="none" stroke="#586e75" stroke-dasharray="5,2" d="M491,-36C491,-36 449,-36 449,-36 443,-36 437,-30 437,-24 437,-24 437,-12 437,-12 437,-6 443,0 449,0 449,0 491,0 491,0 497,0 503,-6 503,-12 503,-12 503,-24 503,-24 503,-30 497,-36 491,-36"/>
-<text text-anchor="middle" x="470" y="-14.3" font-family="Inter,Arial" font-size="14.00" fill="#586e75">FlatMap</text>
+<path fill="none" stroke="#d0dce3" stroke-dasharray="5,2" d="M491,-36C491,-36 449,-36 449,-36 443,-36 437,-30 437,-24 437,-24 437,-12 437,-12 437,-6 443,0 449,0 449,0 491,0 491,0 497,0 503,-6 503,-12 503,-12 503,-24 503,-24 503,-30 497,-36 491,-36"/>
+<text text-anchor="middle" x="470" y="-14.3" font-family="Inter,Arial" font-size="14.00" fill="#d0dce3">FlatMap</text>
 </g>
 <!-- Apply&#45;&gt;FlatMap -->
-<g id="edge4" class="edge impossible">
+<g id="edge4" class="edge impossible,disabled">
 <title>Apply&#45;&gt;FlatMap</title>
-<path fill="none" stroke="#586e75" stroke-dasharray="1,5" d="M357.44,-37C363.21,-35.58 369.29,-34.17 375,-33 391.74,-29.58 410.28,-26.48 426.44,-23.99"/>
-<polygon fill="#586e75" stroke="#586e75" points="427.31,-27.4 436.68,-22.45 426.27,-20.48 427.31,-27.4"/>
-<text text-anchor="middle" x="393" y="-36.2" font-family="Inter,Arial" font-size="11.00" fill="#586e75">flatMap</text>
+<path fill="none" stroke="#d0dce3" stroke-dasharray="1,5" d="M357.44,-37C363.21,-35.58 369.29,-34.17 375,-33 391.74,-29.58 410.28,-26.48 426.44,-23.99"/>
+<polygon fill="#d0dce3" stroke="#d0dce3" points="427.31,-27.4 436.68,-22.45 426.27,-20.48 427.31,-27.4"/>
+<text text-anchor="middle" x="393" y="-36.2" font-family="Inter,Arial" font-size="11.00" fill="#d0dce3">flatMap</text>
 </g>
 <!-- Monad -->
 <!-- Applicative&#45;&gt;Monad -->

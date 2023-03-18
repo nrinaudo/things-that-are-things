@@ -41,17 +41,17 @@
 <text text-anchor="middle" x="271" y="-47.2" font-family="Inter,Arial" font-size="11.00" fill="#586e75">map2</text>
 </g>
 <!-- Applicative -->
-<g id="node4" class="node impossible">
+<g id="node4" class="node impossible,disabled">
 <title>Applicative</title>
-<path fill="none" stroke="#586e75" stroke-dasharray="5,2" d="M499,-90C499,-90 441,-90 441,-90 435,-90 429,-84 429,-78 429,-78 429,-66 429,-66 429,-60 435,-54 441,-54 441,-54 499,-54 499,-54 505,-54 511,-60 511,-66 511,-66 511,-78 511,-78 511,-84 505,-90 499,-90"/>
-<text text-anchor="middle" x="470" y="-68.3" font-family="Inter,Arial" font-size="14.00" fill="#586e75">Applicative</text>
+<path fill="none" stroke="#d0dce3" stroke-dasharray="5,2" d="M499,-90C499,-90 441,-90 441,-90 435,-90 429,-84 429,-78 429,-78 429,-66 429,-66 429,-60 435,-54 441,-54 441,-54 499,-54 499,-54 505,-54 511,-60 511,-66 511,-66 511,-78 511,-78 511,-84 505,-90 499,-90"/>
+<text text-anchor="middle" x="470" y="-68.3" font-family="Inter,Arial" font-size="14.00" fill="#d0dce3">Applicative</text>
 </g>
 <!-- Apply&#45;&gt;Applicative -->
-<g id="edge3" class="edge impossible">
+<g id="edge3" class="edge impossible,disabled">
 <title>Apply&#45;&gt;Applicative</title>
-<path fill="none" stroke="#586e75" stroke-dasharray="1,5" d="M357.28,-49.33C374.69,-52.86 398.07,-57.61 418.95,-61.84"/>
-<polygon fill="#586e75" stroke="#586e75" points="418.46,-65.32 428.96,-63.88 419.86,-58.46 418.46,-65.32"/>
-<text text-anchor="middle" x="393" y="-62.2" font-family="Inter,Arial" font-size="11.00" fill="#586e75">pure</text>
+<path fill="none" stroke="#d0dce3" stroke-dasharray="1,5" d="M357.28,-49.33C374.69,-52.86 398.07,-57.61 418.95,-61.84"/>
+<polygon fill="#d0dce3" stroke="#d0dce3" points="418.46,-65.32 428.96,-63.88 419.86,-58.46 418.46,-65.32"/>
+<text text-anchor="middle" x="393" y="-62.2" font-family="Inter,Arial" font-size="11.00" fill="#d0dce3">pure</text>
 </g>
 <!-- FlatMap -->
 <!-- Apply&#45;&gt;FlatMap -->

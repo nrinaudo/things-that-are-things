@@ -13,67 +13,14 @@ class: center, middle
 
 [Nicolas Rinaudo] • [@NicolasRinaudo@functional.cafe]
 
----
+???
+I want to talk about categorical abstractions - monads, and stuff. Not because this is a particularly original topic, but because, well. I've never been to Warsaw, I really wanted to, and submitting a talk on monads is usually a very good way of getting through a CFP, at least in the Scala community. So far, everything seems to be working according to plan.
 
-## Method 1: theory
+The problem, of course, is that I now have to find something interesting to say about monads. And one thing that I often found frustrating when learning about that family of abstractions is how just about everything is a monad - why even have all these intermediate abstractions if everything is all the things, all the time?
 
-.center[![Overview](img/before-tree-tc.svg)]
+This ties in to one of the ways I learn things: when given a definition of a thing, it helps me just as much to have examples of things that are *not* the thing as of things that are the thing. I really wished I'd had such examples of things that are things, but not other things, while learning abstractions.
 
----
-
-## Method 1: theory
-
-.center[![Overview](img/before-tree-functor.svg)]
-
----
-
-## Method 1: theory
-
-.center[![Overview](img/before-tree-apply.svg)]
-
----
-
-## Method 1: theory
-
-.center[![Overview](img/before-tree-applicative.svg)]
-
----
-
-## Method 1: theory
-
-.center[![Overview](img/before-tree-flatmap.svg)]
-
----
-
-## Method 1: theory
-
-.center[![Overview](img/tree.svg)]
-
----
-
-## Method 2: examples
-
-.center[![Overview](img/tree-type-constructor.svg)]
-
----
-
-## Method 2: examples
-
-.center[![Overview](img/tree-functor.svg)]
-
----
-
-## Method 2: examples
-
-.center[![Overview](img/tree.svg)]
-
----
-class: center, middle
-
-# Things that are things, but not other things
-
-[Nicolas Rinaudo] • [@NicolasRinaudo@functional.cafe]
-
+This talk is my attempt at providing such examples.
 ---
 class: center, middle
 
@@ -709,12 +656,6 @@ class: center, middle
 
 ## Apply
 
-.center[![Overview](img/tree-before-apply.svg)]
-
----
-
-## Apply
-
 .center[![Overview](img/tree-before-apply-map.svg)]
 
 ---
@@ -1138,6 +1079,19 @@ def combine(lhs: X, rhs: X): X =
 
 ## Breaking Product
 
+```scala
+enum Label:
+  case Front
+  case Back
+  case Bug
+  case Feature
+
+```
+
+---
+
+## Breaking Product
+
 .center[![Overview](img/product-map2-all-xs.svg)]
 
 .diff-rm[
@@ -1165,7 +1119,7 @@ def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
 
 .diff-add[
 ```scala
-*type F[A] = A×`String`
+*type F[A] = A×`Label`
 
 def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
   val (a×x1) = fa
@@ -1175,7 +1129,7 @@ def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
 
   c×x3
 
-*def combine(lhs: `String`, rhs: `String`): X =
+*def combine(lhs: `Label`, rhs: `Label`): X =
   ???
 ```
 ]
@@ -1188,7 +1142,7 @@ def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
 
 .diff-rm[
 ```scala
-type F[A] = A×String
+type F[A] = A×Label
 
 def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
   val (a×x1) = fa
@@ -1198,7 +1152,7 @@ def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
 
   c×x3
 *
-*&#x200B;`def combine(lhs: String, rhs: String): String =`
+*&#x200B;`def combine(lhs: Label, rhs: Label): Label =`
 * `???`
 ```
 ]
@@ -1211,7 +1165,7 @@ def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
 
 .diff-rm[
 ```scala
-type F[A] = A×String
+type F[A] = A×Label
 
 def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
   val (a×x1) = fa
@@ -1221,7 +1175,7 @@ def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
 
   c×x3
 *
-*&#x200B;`def combine(lhs: String, rhs: String): String =`
+*&#x200B;`def combine(lhs: Label, rhs: Label): Label =`
 * `???`
 ```
 ]
@@ -1235,7 +1189,7 @@ def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
 
 .diff-rm[
 ```scala
-type F[A] = A×String
+type F[A] = A×Label
 
 def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
   val (a×x1) = fa
@@ -1245,7 +1199,7 @@ def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
 
 * `c×x3`
 *
-*&#x200B;`def combine(lhs: String, rhs: String): String =`
+*&#x200B;`def combine(lhs: Label, rhs: Label): Label =`
 * `???`
 ```
 ]
@@ -1258,7 +1212,7 @@ def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =
 
 .diff-rm[
 ```scala
-type F[A] = A×String
+type F[A] = A×Label
 *
 *&#x200B;`def map2[A, B, C](f: (A, B) => C)(fa: F[A], fb: F[B]): F[C] =`
 * `val (a×x1) = fa`
@@ -1268,7 +1222,7 @@ type F[A] = A×String
 *
 * `c×x3`
 *
-*&#x200B;`def combine(lhs: String, rhs: String): String =`
+*&#x200B;`def combine(lhs: Label, rhs: Label): Label =`
 * `???`
 ```
 ]
@@ -1280,7 +1234,7 @@ type F[A] = A×String
 .center[![Overview](img/product-map2-string-no-combine.svg)]
 
 ```scala
-type F[A] = A×String
+type F[A] = A×Label
 ```
 
 ---
@@ -1291,7 +1245,7 @@ type F[A] = A×String
 
 .diff-rm[
 ```scala
-type F[A] = A×String
+type F[A] = A×Label
 ```
 ]
 
@@ -1303,7 +1257,7 @@ type F[A] = A×String
 
 .diff-rm[
 ```scala
-*type `F[A]` = A×String
+*type `F[A]` = A×Label
 ```
 ]
 
@@ -1315,7 +1269,7 @@ type F[A] = A×String
 
 .diff-add[
 ```scala
-*type `Labelled[A]` = A×String
+*type `Labelled[A]` = A×Label
 ```
 ]
 
@@ -1328,7 +1282,7 @@ type F[A] = A×String
 .center[![Overview](img/labelled.svg)]
 
 ```scala
-type Labelled[A] = A×String
+type Labelled[A] = A×Label
 
 ```
 
@@ -1352,18 +1306,6 @@ class: center, middle
 ## Applicative
 
 .center[![Overview](img/tree-before-applicative.svg)]
-
----
-
-## Applicative
-
-.center[![Overview](img/tree-before-applicative-map.svg)]
-
----
-
-## Applicative
-
-.center[![Overview](img/tree-before-applicative-map2.svg)]
 
 ---
 
@@ -1725,19 +1667,6 @@ class: center, middle
 ## FlatMap
 
 .center[![Overview](img/tree-before-flatmap.svg)]
-
----
-
-## FlatMap
-
-.center[![Overview](img/tree-before-flatmap-map.svg)]
-
----
-
-## FlatMap
-
-.center[![Overview](img/tree-before-map2.svg)]
-
 
 ---
 
@@ -2495,26 +2424,6 @@ class: center, middle
 
 ## Monad
 
-.center[![Overview](img/tree-before-monad-through-applicative-map.svg)]
-
----
-
-## Monad
-
-.center[![Overview](img/tree-before-monad-through-applicative-map2.svg)]
-
----
-
-## Monad
-
-.center[![Overview](img/tree-before-monad-through-applicative-pure.svg)]
-
-
-
----
-
-## Monad
-
 .center[![Overview](img/tree-before-monad-through-applicative-flatmap.svg)]
 
 ---
@@ -2783,25 +2692,6 @@ class: center, middle
 ## Monad
 
 .center[![Overview](img/tree-before-monad-through-flatmap.svg)]
-
----
-
-## Monad
-
-.center[![Overview](img/tree-before-monad-through-flatmap-map.svg)]
-
----
-
-## Monad
-
-.center[![Overview](img/tree-before-monad-through-flatmap-map2.svg)]
-
----
-
-## Monad
-
-.center[![Overview](img/tree-before-monad-through-flatmap-flatmap.svg)]
-
 
 ---
 
@@ -3099,6 +2989,17 @@ A binary parametric product type is:
 --
 
 * not a `Monad` if a `FlatMap` and the other member is not a `Monoid`.
+
+???
+
+And with this, I've shown you all the counter examples I wanted to show you.
+
+To summarize, we've seen, roughly, that:
+* contravariant functors were not functors.
+* apply and applicative have a deep connection with semigroups and monoids - which is not exactly new, this was front and center in McBride's paper on applicative functors, but re-discovering this connection through counter example made it feel more concrete to me.
+* monads and flatmaps are about having a value - which sounds a little weird on the face of it, but really is just another way of saying that monads are about chaining functions.
+
+I hope this was, if not new information, at least an entertaining twist on old information. I certainly was quite entertaining to work on and figure out for myself. And with that, I'd be happy to answer any question you might have.
 
 ---
 class: center, middle
